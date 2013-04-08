@@ -22,23 +22,18 @@ assumed to be children of `LLVM_WORK`. From now on:
 
 * Let `LLVM_SRC` be `$LLMV_WORK/src`
 * Let `LLVM_BUILD` be `$LLVM_WORK/build`
-* Let `LLVM_ROOT` be `$LLVM_ROOT/root`
+* Let `LLVM_ROOT` be `$LLVM_WORK/root`
 
 First we create the working directory:
 
     $ mkdir $LLVM_WORK
 
-LLVM-3.0 and CLANG-3.0 are needed. We can get them from Git repositories:
+LLVM and CLANG are needed. We can get them from Git repositories:
 
     $ cd $LLVM_WORK
-    $ git clone -n -o llvm-upstream --depth 1 \
-                http://llvm.org/git/llvm.git $LLVM_SRC
+    $ git clone http://llvm.org/git/llvm.git $LLVM_SRC
     $ cd $LLVM_SRC
-    $ git checkout -t remotes/llvm-upstream/release_30
-    $ git clone -n -o clang-upstream --depth 1 \
-                http://llvm.org/git/clang.git tools/clang
-    $ cd tools/clang
-    $ git checkout -t remotes/clang-upstream/release_30
+    $ git clone http://llvm.org/git/clang.git tools/clang
 
 We will build in `LLVM_BUILD`:
 
@@ -149,8 +144,8 @@ information.
 Additional Info for Students
 ----------------------------
 
-Your project must be an extension of this project. You are required to use Git
-to version your code. A good tutorial is available [here][www/proGit].
+You are required to use Git to version your code. A good tutorial is available 
+[here][www/proGit].
 
 Tests are a part of the project, so you have also to add them in order to prove
 that your pass is working correctly. Tests must be added according to the

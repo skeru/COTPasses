@@ -1,11 +1,11 @@
 
 #include "cot/AllPasses.h"
 
-#include "llvm/Constants.h"
-#include "llvm/Instructions.h"
-#include "llvm/Module.h"
+#include "llvm/IR/Constants.h"
+#include "llvm/IR/Instructions.h"
+#include "llvm/IR/Module.h"
+#include "llvm/IR/Type.h"
 #include "llvm/Support/ErrorHandling.h"
-#include "llvm/Type.h"
 
 using namespace cot;
 
@@ -89,7 +89,8 @@ llvm::Function &HelloLLVM::GetHelloWorld(llvm::Module &Mod, bool &Modified) {
 
   // We want to generate 'printf("Hello, World!")'. First parameter is a
   // constant.
-  llvm::Constant *MsgInit = llvm::ConstantArray::get(Ctx, "Hello, World!\n");
+  llvm::StringRef MsgContent("Hello, World!\n");
+  llvm::Constant *MsgInit = llvm::ConstantDataArray::getString(Ctx, MsgContent);
 
   // Put it into a global variable.
   Msg = new llvm::GlobalVariable(Mod,

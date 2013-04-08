@@ -2,7 +2,7 @@
 #include "cot/AllPasses.h"
 #include "cot/InstructionCount.h"
 
-#include "llvm/Function.h"
+#include "llvm/IR/Function.h"
 #include "llvm/Support/ErrorHandling.h"
 
 using namespace cot;

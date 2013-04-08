@@ -6,7 +6,7 @@
 #define DEBUG_TYPE "function-eraser"
 
 #include "llvm/ADT/Statistic.h"
-#include "llvm/Module.h"
+#include "llvm/IR/Module.h"
 #include "llvm/Support/CommandLine.h"
 #include "llvm/Support/ErrorHandling.h"
 

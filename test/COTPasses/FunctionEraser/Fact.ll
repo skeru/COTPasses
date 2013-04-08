@@ -1,5 +1,5 @@
 
-; RUN: opt -load %projshlibdir/COTPasses.so     \
+; RUN: opt -load %projshlibdir/COTPasses.so  -disable-verify   \
 ; RUN:     -function-eraser -erase-threshold=10 \
 ; RUN:     -S -o - %s | FileCheck %s
 ; REQUIRES: loadable_module
@@ -30,4 +30,4 @@ define i32 @fact(i32 %n) nounwind {
   ret i32 %12
 }
 
-;CHECK: declare i32 @fact(i32) nounwind
+;CHECK: declare i32 @fact(i32)
