@@ -56,7 +56,7 @@ In order to start hacking with COT passes you have to clone the COT master
 repository on [GitHub][www/cotRepository] into LLVM `projects` directory:
 
     $ cd $LLVM_SRC/projects
-    $ git clone git://github.com/speziale-ettore/COTPasses.git cot
+    $ git clone git://github.com/michele-scandale/COTPasses.git cot
 
 You need to build the `configure` script:
 
