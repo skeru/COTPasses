@@ -10,7 +10,7 @@ target triple = "i386-pc-linux-gnu"
 define i32 @fact(i32 %n) nounwind {
   %1 = alloca i32, align 4
   store i32 %n, i32* %1, align 4
-  %2 = load i32* %1, align 4
+  %2 = load i32, i32* %1, align 4
   %3 = icmp eq i32 %2, 0
   br i1 %3, label %4, label %5
 
@@ -18,8 +18,8 @@ define i32 @fact(i32 %n) nounwind {
   br label %11
 
 ; <label>:5                                       ; preds = %0
-  %6 = load i32* %1, align 4
-  %7 = load i32* %1, align 4
+  %6 = load i32, i32* %1, align 4
+  %7 = load i32, i32* %1, align 4
   %8 = sub i32 %7, 1
   %9 = call i32 @fact(i32 %8)
   %10 = mul i32 %6, %9

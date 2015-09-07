@@ -106,7 +106,7 @@ llvm::Function &HelloLLVM::GetHelloWorld(llvm::Module &Mod, bool &Modified) {
   Offsets.assign(2, llvm::ConstantInt::get(llvm::Type::getInt32Ty(Ctx), 0));
 
   // Then, use it to perform some pointer arithmetics.
-  MsgPtr = llvm::GetElementPtrInst::Create(Msg->getType()->getScalarType(), Msg, Offsets, "", Entry);
+  MsgPtr = llvm::GetElementPtrInst::Create(nullptr, Msg, Offsets, "", Entry);
 
   // Now we need the 'printf' function.
   llvm::Function &Printf = GetPrintf(Mod);
