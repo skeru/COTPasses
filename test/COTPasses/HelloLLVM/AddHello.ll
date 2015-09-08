@@ -1,5 +1,5 @@
 
-; RUN: opt -load %projshlibdir/COTPasses.so \
+; RUN: opt -load %projshlibdir/COTPasses%shlibext \
 ; RUN:     -hello-llvm                      \
 ; RUN:     -S -o - %s | FileCheck %s
 ; REQUIRES: loadable_module
@@ -15,8 +15,8 @@ define void @foo() nounwind {
 
 ; CHECK:      define void @hello_world() {
 ; CHECK-NEXT: entry:
-; CHECK-NEXT:   %0 = getelementptr [15 x i8], [15 x 18]* @hello_world.msg, i32 0, i32 0
-; CHECK-NEXT:   %1 = call i32 (i8*, ...)* @printf(i8* %0)
+; CHECK-NEXT:   %0 = getelementptr [15 x i8], [15 x i8]* @hello_world.msg, i32 0, i32 0
+; CHECK-NEXT:   %1 = call i32 (i8*, ...) @printf(i8* %0)
 ; CHECK-NEXT:   ret void
 ; CHECK-NEXT: }
 
