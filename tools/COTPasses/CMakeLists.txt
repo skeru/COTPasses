@@ -5,4 +5,4 @@ add_library(COTPasses MODULE
  $<TARGET_OBJECTS:InstructionCount>
 )
 
-set_target_properties(COTPasses PROPERTIES PREFIX "")
+set_target_properties(COTPasses PROPERTIES PREFIX "" SUFFIX "${LLVM_PLUGIN_EXT}")
