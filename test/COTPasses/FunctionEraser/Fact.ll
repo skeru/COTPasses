@@ -1,5 +1,5 @@
 
-; RUN: opt -load %projshlibdir/COTPasses.so  -disable-verify   \
+; RUN: opt -load %projshlibdir/COTPasses%shlibext  -disable-verify   \
 ; RUN:     -function-eraser -erase-threshold=10 \
 ; RUN:     -S -o - %s | FileCheck %s
 ; REQUIRES: loadable_module

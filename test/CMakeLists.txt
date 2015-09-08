@@ -1,6 +1,6 @@
 set(HOST_OS ${CMAKE_SYSTEM_NAME})
 set(HOST_ARCH ${CMAKE_SYSTEM_PROCESSOR})
-
+set(SHLIBEXT "${LTDL_SHLIB_EXT}")
 configure_file(
   ${CMAKE_CURRENT_SOURCE_DIR}/lit.site.cfg.in
   ${CMAKE_CURRENT_BINARY_DIR}/lit.site.cfg

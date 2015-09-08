@@ -1,5 +1,5 @@
 
-; RUN: opt -load %projshlibdir/COTPasses.so \
+; RUN: opt -load %projshlibdir/COTPasses%shlibext \
 ; RUN:     -instruction-count -analyze      \
 ; RUN:     -S -o - %s | FileCheck %s
 ; REQUIRES: loadable_module
