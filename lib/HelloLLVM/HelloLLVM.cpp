@@ -27,7 +27,7 @@ public:
   // by the pass.
   virtual void getAnalysisUsage(llvm::AnalysisUsage &AU) const;
 
-  virtual const char *getPassName() const {
+  virtual llvm::StringRef getPassName() const {
     return "Hello llvm";
   }
 

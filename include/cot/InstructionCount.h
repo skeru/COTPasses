@@ -31,7 +31,7 @@ public:
   // '-analyze' 'opt' command line switch.
   virtual void print(llvm::raw_ostream &OS, const llvm::Module *Mod) const;
 
-  virtual const char *getPassName() const {
+  virtual llvm::StringRef getPassName() const {
     return "Instruction counter";
   }
 
