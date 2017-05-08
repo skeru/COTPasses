@@ -39,30 +39,31 @@ We will build in `LLVM_BUILD`:
 
     $ mkdir $LLVM_BUILD
     $ cd $LLVM_BUILD
-    $ $LLVM_SRC/configure --prefix=$LLVM_ROOT --disable-optimized
-    $ make -j $N
-    $ make install
+    $ cmake $LLVM_SRC -DCMAKE_INSTALL_PREFIX=$LLVM_ROOT -GNinja -DCMAKE_BUILD_TYPE=Debug
+    $ ninja -j $N
+    $ ninja install
 
-Using the `--disable-optimized` configure switch, the compiler is built in debug
-mode. This usually requires a lot of disk space. If you have space problems, try
-using the optimized version, given `--enable-optimized` instead of
-`--disable-optimized`.
+You can substitute `-DCMAKE_BUILD_TYPE=Debug` with `-DCMAKE_BUILD_TYPE=Release`
+to generate production quality binaries.
 
-Building with `make -J $N` allows to spawn multiple compiler in parallel, thus
+The LLVM Community advices to use `ninja` as build system because it has better
+performance with respect to `autotools`. You can obtain `ninja-build` package
+from the most common source repository or manually install it.
+If you prefer to keep using `autotools` you should remove the `-GNinja` option
+from the `cmake` invocation and substitute every call to `ninja` with a call to
+`make`.
+
+Building with `ninja -j $N` allows to spawn multiple compiler in parallel, thus
 speeding up the compilation process. Usually `N` is set to twice the number of
-available CPUs.
+available physical CPUs.
 
 In order to start hacking with COT passes you have to clone the COT master
 repository on [GitHub][www/cotRepository] into LLVM `projects` directory:
 
     $ cd $LLVM_SRC/projects
-    $ git clone git://github.com/michele-scandale/COTPasses.git cot
+    $ git clone git://github.com/skeru/COTPasses.git cot
 
-You need to build the `configure` script:
-
-    $ cd cot/autoconf
-    $ ./AutoRegen.sh
-
+# TODO update
 Finally you have to build it:
 
     $ cd $LLVM_BUILD/projects
@@ -73,7 +74,7 @@ Finally you have to build it:
 
 After building, tests are run using:
 
-    $ make check
+    $ ninja check
 
 That is all, you are ready to start coding!
 
@@ -103,16 +104,17 @@ To add a new pass to this project:
 1. Create the pass implementation directory under `lib`
 2. Add pass implementation stub, using another pass, e.g. `InstructionCount`, as
    reference
-3. Write a `Makefile` for the pass. This usually requires copying another pass
-   Makefile and changing `LIBRARYNAME` to match your pass name
-4. Modify `lib/Makefile` in order to visit your pass directory
+3. Write a `CMakeLists.txt` for the pass.
+   This usually requires copying another pass CMakeLists.txt and changing
+   parameters of the macro `add_cot_pass` to match your pass name
+4. Modify `lib/CMakeLists.txt` in order to visit your pass directory
 5. If needed, put your pass public header files under `include/cot`
 6. Add pass creation and initialization, `Create*` and `initialize*`
    respectively, prototypes to `include/code/AllPasses.h`
 
 In order to be usable, the pass must be linked inside `COTPasses`:
 
-1. Add pass static library to `tools/COTPasses/Makefile` `USEDLIBS` variable
+1. Add pass static library to `tools/COTPasses/CMakeLists.txt` in `add_library`
 2. Edit `tools/COTPasses/ForceLinking.cpp`, adding calls to pass creation and
    initialization functions to `::ForceLinking::ForceLinking` and
    `::ForceInitialization::ForceInitialization` respectively
@@ -144,7 +146,7 @@ information.
 Additional Info for Students
 ----------------------------
 
-You are required to use Git to version your code. A good tutorial is available 
+You are required to use Git to version your code. A good tutorial is available
 [here][www/proGit].
 
 Tests are a part of the project, so you have also to add them in order to prove
@@ -156,7 +158,7 @@ Please notice that LLVM is very well documented: code is very readable and
 different howtos and reference manuals are available [here][www/llvmDoc].
 
 [www/llvm]:          http://www.llvm.org
-[www/llvmDoc]:       http://llvm.org/releases/3.0/docs/index.html
-[www/llvmTest]:      http://llvm.org/releases/3.0/docs/TestingGuide.html
+[www/llvmDoc]:       http://llvm.org/releases/4.0/docs/index.html
+[www/llvmTest]:      http://llvm.org/releases/4.0/docs/TestingGuide.html
 [www/proGit]:        http://progit.org/book
-[www/cotRepository]: https://github.com/speziale-ettore/COTPasses
+[www/cotRepository]: https://github.com/skeru/COTPasses
